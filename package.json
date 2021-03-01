@@ -9,7 +9,7 @@
     "url": "https://github.com/dmx-systems/dmx-file-upload.git"
   },
   "scripts": {
-    "build": "../../node_modules/.bin/webpack -p --hide-modules",
+    "build": "webpack -p --hide-modules",
     "stats": "webpack -p --json > stats.json && webpack-bundle-analyzer stats.json src/main/resources/web"
   },
   "dependencies": {
