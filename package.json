@@ -13,7 +13,6 @@
     "stats": "webpack -p --json > stats.json && webpack-bundle-analyzer stats.json src/main/resources/web"
   },
   "dependencies": {
-    "vue": "2.6.11"
   },
   "devDependencies": {
     "babel-core": "6.26.3",
