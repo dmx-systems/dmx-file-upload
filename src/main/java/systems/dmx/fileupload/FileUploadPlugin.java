@@ -22,10 +22,13 @@ import java.util.logging.Logger;
 
 
 
+/**
+ * HTTP POST endpoints for DMX file repo.
+ * Not an OSGi service (no service interface implemented).
+ */
 @Path("/upload")
-@Consumes("application/json")
 @Produces("application/json")
-public class FileUploadPlugin extends PluginActivator implements FileUploadService {
+public class FileUploadPlugin extends PluginActivator {
 
     // ------------------------------------------------------------------------------------------------------- Constants
 
@@ -36,28 +39,37 @@ public class FileUploadPlugin extends PluginActivator implements FileUploadServi
     // ---------------------------------------------------------------------------------------------- Instance Variables
 
     @Inject private FilesService fs;
-    @Inject private ConfigService configService;
+    @Inject private ConfigService cs;
 
     private Logger logger = Logger.getLogger(getClass().getName());
 
     // -------------------------------------------------------------------------------------------------- Public Methods
 
-    // FileUploadService
-
+    /**
+     * HTTP endpoint for FileService's storeFile() method.
+     */
     @POST
     @Path("/{path}")
     @Consumes("multipart/form-data")
     @Transactional
-    @Override
     public StoredFile storeFile(UploadedFile file, @PathParam("path") String repoPath) {
         return fs.storeFile(file, repoPath);
     }
 
-    // Hooks
+    /**
+     * HTTP endpoint for FileService's createFolder() method.
+     */
+    @POST
+    @Path("/{path}/folder/{folder_name}")
+    public void createFolder(@PathParam("folder_name") String folderName, @PathParam("path") String repoPath) {
+        fs.createFolder(folderName, repoPath);
+    }
+
+    // *** Hooks ***
 
     @Override
     public void preInstall() {
-        configService.registerConfigDefinition(new ConfigDefinition(
+        cs.registerConfigDefinition(new ConfigDefinition(
             // TODO: can't use AC constants -> cyclic dependency
             // TODO: move registration to AC module?
             ConfigTarget.TYPE_INSTANCES, "dmx.accesscontrol.username",
@@ -72,8 +84,8 @@ public class FileUploadPlugin extends PluginActivator implements FileUploadServi
         // (at preInstall() time) would fail as the Config service already holds such a registration.
         // Note 2: we must check if the Config service is still available. If the Config plugin is redeployed the
         // Files plugin is stopped/started as well but at shutdown() time the Config service is already gone.
-        if (configService != null) {
-            configService.unregisterConfigDefinition("dmx.files.disk_quota");
+        if (cs != null) {
+            cs.unregisterConfigDefinition("dmx.files.disk_quota");
         }
     }
 }
