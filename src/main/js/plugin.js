@@ -9,6 +9,10 @@ export default ({store}) => ({
     {
       comp: require('./components/dmx-upload-dialog').default,
       mount: 'webclient'
+    },
+    {
+      comp: require('./components/dmx-create-folder-dialog').default,
+      mount: 'webclient'
     }
   ],
 
@@ -17,6 +21,10 @@ export default ({store}) => ({
       {
         label: 'Upload File',
         handler: _ => store.dispatch('openUploadDialog')
+      },
+      {
+        label: 'Create Folder',
+        handler: _ => store.dispatch('openCreateFolderDialog')
       }
     ]
   }
