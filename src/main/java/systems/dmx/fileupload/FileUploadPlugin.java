@@ -8,15 +8,17 @@ import systems.dmx.core.model.SimpleValue;
 import systems.dmx.core.osgi.PluginActivator;
 import systems.dmx.core.service.Inject;
 import systems.dmx.core.service.Transactional;
+import systems.dmx.files.FileRepositoryException;
 import systems.dmx.files.FilesService;
 import systems.dmx.files.StoredFile;
 import systems.dmx.files.UploadedFile;
 
+import javax.ws.rs.Consumes;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.POST;
 import javax.ws.rs.Produces;
-import javax.ws.rs.Consumes;
+import javax.ws.rs.WebApplicationException;
 
 import java.util.logging.Logger;
 
@@ -53,7 +55,15 @@ public class FileUploadPlugin extends PluginActivator {
     @Consumes("multipart/form-data")
     @Transactional
     public StoredFile storeFile(UploadedFile file, @PathParam("path") String repoPath) {
-        return fs.storeFile(file, repoPath);
+        String operation = "Processing store-file request for " + file + " at repository path \"" + repoPath + "\"";
+        try {
+            logger.info(operation);
+            return fs.storeFile(file, repoPath);
+        } catch (FileRepositoryException e) {
+            throw new WebApplicationException(new RuntimeException(operation + " failed", e), e.getStatus());
+        } catch (Exception e) {
+            throw new RuntimeException(operation + " failed", e);
+        }
     }
 
     /**
@@ -62,7 +72,16 @@ public class FileUploadPlugin extends PluginActivator {
     @POST
     @Path("/{path}/folder/{folder_name}")
     public void createFolder(@PathParam("folder_name") String folderName, @PathParam("path") String repoPath) {
-        fs.createFolder(folderName, repoPath);
+        String operation = "Processing create-folder request for \"" + folderName + "\" at repository path \"" +
+            repoPath + "\"";
+        try {
+            logger.info(operation);
+            fs.createFolder(folderName, repoPath);
+        } catch (FileRepositoryException e) {
+            throw new WebApplicationException(new RuntimeException(operation + " failed", e), e.getStatus());
+        } catch (Exception e) {
+            throw new RuntimeException(operation + " failed", e);
+        }
     }
 
     // *** Hooks ***
