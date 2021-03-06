@@ -44,10 +44,6 @@ export default {
 
   methods: {
 
-    close () {
-      this.$store.dispatch('closeUploadDialog')
-    },
-
     onSuccess (response, file, fileList) {
       this.$store.dispatch('revealRelatedTopic', {relTopic: new this.dmx.RelatedTopic(response.topic)})
       this.$refs.upload.clearFiles()
@@ -60,6 +56,10 @@ export default {
 
     clearError () {
       this.error = ''
+    },
+
+    close () {
+      this.$store.dispatch('closeUploadDialog')
     }
   }
 }

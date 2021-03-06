@@ -2,10 +2,8 @@
   <el-dialog custom-class="dmx-create-folder-dialog" :visible="visible2" :title="title" :modal="false" v-draggable
       @opened="focus" @close="close">
     <div class="field-label">Folder Name</div>
-    <el-input v-model="model" ref="input"></el-input>
-    <div slot="footer">
-      <el-button type="primary" @click="createFolder">Create Folder</el-button>
-    </div>
+    <el-input v-model="model" ref="input" @keyup.native.enter="action"></el-input>
+    <el-button slot="footer" type="primary" @click="action">Create Folder</el-button>
   </el-dialog>
 </template>
 
@@ -43,10 +41,10 @@ export default {
       this.$refs.input.focus()
     },
 
-    createFolder () {
+    action () {
       this.$store.dispatch('createFolder', {repoPath: this.path, folderName: this.model})
+      this.close()
     },
-
 
     close () {
       this.$store.dispatch('closeCreateFolderDialog')
