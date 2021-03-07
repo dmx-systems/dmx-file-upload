@@ -5,6 +5,8 @@ export default ({store}) => ({
     module: require('./file-upload').default
   },
 
+  extraElementUI: true,
+
   components: [
     {
       comp: require('./components/dmx-upload-dialog').default,
