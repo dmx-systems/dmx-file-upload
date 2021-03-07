@@ -30,6 +30,7 @@
         <dependency>
             <groupId>commons-fileupload</groupId>
             <artifactId>commons-fileupload</artifactId>
+            <version>1.2.2</version>
         </dependency>
     </dependencies>
 
@@ -40,9 +41,8 @@
                 <artifactId>maven-bundle-plugin</artifactId>
                 <configuration>
                     <instructions>
-                        <Bundle-Activator>
-                            systems.dmx.fileupload.FileUploadPlugin
-                        </Bundle-Activator>
+                        <Bundle-Activator>systems.dmx.fileupload.FileUploadPlugin</Bundle-Activator>
+                        <Embed-Dependency>commons-fileupload</Embed-Dependency>
                     </instructions>
                 </configuration>
             </plugin>
