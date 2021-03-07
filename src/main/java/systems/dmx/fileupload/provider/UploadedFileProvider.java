@@ -94,7 +94,7 @@ public class UploadedFileProvider implements MessageBodyReader<UploadedFile>, Di
                     if (file != null) {
                         throw new RuntimeException("Only single file uploads are supported");
                     }
-                    file = new UploadedFile(item, this);
+                    file = new UploadedFile(item.getName(), item.getSize(), item.getInputStream(), this);
                     logger.info("### field \"" + fieldName + "\" => " + file);
                 }
             }
