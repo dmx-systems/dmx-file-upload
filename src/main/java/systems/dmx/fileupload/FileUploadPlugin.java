@@ -4,6 +4,7 @@ import systems.dmx.config.ConfigDefinition;
 import systems.dmx.config.ConfigModificationRole;
 import systems.dmx.config.ConfigService;
 import systems.dmx.config.ConfigTarget;
+import systems.dmx.core.RelatedTopic;
 import systems.dmx.core.model.SimpleValue;
 import systems.dmx.core.osgi.PluginActivator;
 import systems.dmx.core.service.Inject;
@@ -71,12 +72,13 @@ public class FileUploadPlugin extends PluginActivator {
      */
     @POST
     @Path("/{path}/folder/{folder_name}")
-    public void createFolder(@PathParam("folder_name") String folderName, @PathParam("path") String repoPath) {
+    @Transactional
+    public RelatedTopic createFolder(@PathParam("folder_name") String folderName, @PathParam("path") String repoPath) {
         String operation = "Processing create-folder request for \"" + folderName + "\" at repository path \"" +
             repoPath + "\"";
         try {
             logger.info(operation);
-            fs.createFolder(folderName, repoPath);
+            return fs.createFolder(folderName, repoPath);
         } catch (FileRepositoryException e) {
             throw new WebApplicationException(new RuntimeException(operation + " failed", e), e.getStatus());
         } catch (Exception e) {
