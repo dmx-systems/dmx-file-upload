@@ -1,4 +1,4 @@
-export default ({axios: http}) => {
+export default ({dmx, axios: http}) => {
 
   const state = {
     visible: false,     // "Upload" dialog visibility
@@ -19,8 +19,10 @@ export default ({axios: http}) => {
       initFolderState(rootState)
     },
 
-    createFolder (_, {repoPath, folderName}) {
-      http.post(`/upload/${encodeURIComponent(repoPath)}/folder/${folderName}`)
+    createFolder ({dispatch}, {repoPath, folderName}) {
+      http.post(`/upload/${encodeURIComponent(repoPath)}/folder/${folderName}`).then(response => {
+        dispatch('revealRelatedTopic', {relTopic: new dmx.RelatedTopic(response.data)})
+      })
     },
 
     closeUploadDialog () {
