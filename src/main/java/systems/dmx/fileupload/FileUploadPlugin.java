@@ -9,6 +9,7 @@ import systems.dmx.core.model.SimpleValue;
 import systems.dmx.core.osgi.PluginActivator;
 import systems.dmx.core.service.Inject;
 import systems.dmx.core.service.Transactional;
+import static systems.dmx.files.Constants.*;
 import systems.dmx.files.FileRepositoryException;
 import systems.dmx.files.FilesService;
 import systems.dmx.files.StoredFile;
@@ -94,7 +95,7 @@ public class FileUploadPlugin extends PluginActivator {
             // TODO: can't use AC constants -> cyclic dependency
             // TODO: move registration to AC module?
             ConfigTarget.TYPE_INSTANCES, "dmx.accesscontrol.username",
-            mf.newTopicModel("dmx.files.disk_quota", new SimpleValue(DISK_QUOTA_MB)),
+            mf.newTopicModel(DISK_QUOTA, new SimpleValue(DISK_QUOTA_MB)),
             ConfigModificationRole.ADMIN
         ));
     }
@@ -106,7 +107,7 @@ public class FileUploadPlugin extends PluginActivator {
         // Note 2: we must check if the Config service is still available. If the Config plugin is redeployed the
         // Files plugin is stopped/started as well but at shutdown() time the Config service is already gone.
         if (cs != null) {
-            cs.unregisterConfigDefinition("dmx.files.disk_quota");
+            cs.unregisterConfigDefinition(DISK_QUOTA);
         }
     }
 }

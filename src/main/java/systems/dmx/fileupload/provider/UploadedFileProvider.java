@@ -4,6 +4,7 @@ import systems.dmx.core.Topic;
 import systems.dmx.core.osgi.CoreActivator;
 import systems.dmx.core.service.CoreService;
 import systems.dmx.config.ConfigService;
+import static systems.dmx.files.Constants.*;
 import systems.dmx.files.DiskQuotaCheck;
 import systems.dmx.files.FilesPlugin;
 import systems.dmx.files.UploadedFile;
@@ -110,7 +111,7 @@ public class UploadedFileProvider implements MessageBodyReader<UploadedFile>, Di
     private long diskQuota(String username) {
         Topic usernameTopic = CoreActivator.getCoreService().getPrivilegedAccess().getUsernameTopic(username);
         ConfigService cs = CoreActivator.getService(ConfigService.class);
-        Topic configTopic = cs.getConfigTopic("dmx.files.disk_quota", usernameTopic.getId());
+        Topic configTopic = cs.getConfigTopic(DISK_QUOTA, usernameTopic.getId());
         return 1024 * 1024 * configTopic.getSimpleValue().intValue();
     }
 }
