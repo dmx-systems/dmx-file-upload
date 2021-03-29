@@ -43,6 +43,7 @@
                     <instructions>
                         <Bundle-Activator>systems.dmx.fileupload.FileUploadPlugin</Bundle-Activator>
                         <Embed-Dependency>commons-fileupload</Embed-Dependency>
+                        <Import-Package>!javax.portlet, *</Import-Package>
                     </instructions>
                 </configuration>
             </plugin>
