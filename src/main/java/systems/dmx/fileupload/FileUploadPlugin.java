@@ -1,7 +1,7 @@
 package systems.dmx.fileupload;
 
-import systems.dmx.config.ConfigDefinition;
-import systems.dmx.config.ConfigModificationRole;
+import systems.dmx.config.ConfigDef;
+import systems.dmx.config.ConfigModRole;
 import systems.dmx.config.ConfigService;
 import systems.dmx.config.ConfigTarget;
 import systems.dmx.core.RelatedTopic;
@@ -91,12 +91,12 @@ public class FileUploadPlugin extends PluginActivator {
 
     @Override
     public void preInstall() {
-        cs.registerConfigDefinition(new ConfigDefinition(
+        cs.registerConfigDef(new ConfigDef(
             // TODO: can't use AC constants -> cyclic dependency
             // TODO: move registration to AC module?
             ConfigTarget.TYPE_INSTANCES, "dmx.accesscontrol.username",
             mf.newTopicModel(DISK_QUOTA, new SimpleValue(DISK_QUOTA_MB)),
-            ConfigModificationRole.ADMIN
+            ConfigModRole.ADMIN
         ));
     }
 
@@ -107,7 +107,7 @@ public class FileUploadPlugin extends PluginActivator {
         // Note 2: we must check if the Config service is still available. If the Config plugin is redeployed the
         // Files plugin is stopped/started as well but at shutdown() time the Config service is already gone.
         if (cs != null) {
-            cs.unregisterConfigDefinition(DISK_QUOTA);
+            cs.unregisterConfigDef(DISK_QUOTA);
         }
     }
 }
