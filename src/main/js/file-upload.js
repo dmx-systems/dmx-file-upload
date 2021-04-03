@@ -14,23 +14,23 @@ export default ({dmx, axios: http}) => {
       initFolderState(rootState)
     },
 
+    closeUploadDialog () {
+      state.visible = false
+    },
+
     openCreateFolderDialog ({rootState}) {
       state.visible2 = true
       initFolderState(rootState)
     },
 
-    createFolder ({dispatch}, {repoPath, folderName}) {
-      http.post(`/upload/${encodeURIComponent(repoPath)}/folder/${folderName}`).then(response => {
-        dispatch('revealRelatedTopic', {relTopic: new dmx.RelatedTopic(response.data)})
-      })
-    },
-
-    closeUploadDialog () {
-      state.visible = false
-    },
-
     closeCreateFolderDialog () {
       state.visible2 = false
+    },
+
+    createFolder ({dispatch}, {repoPath, folderName}) {
+      http.post(`/upload/${encodeURIComponent(repoPath)}/folder/${folderName}`).then(response => {
+        dispatch('revealRelatedTopic', {relTopic: new dmx.RelatedTopic(response.data)}, {root: true})
+      })
     }
   }
 
@@ -43,6 +43,7 @@ export default ({dmx, axios: http}) => {
   }
 
   return {
+    namespaced: true,
     state,
     actions
   }

@@ -42,12 +42,12 @@ export default {
     },
 
     action () {
-      this.$store.dispatch('createFolder', {repoPath: this.path, folderName: this.model})
+      this.$store.dispatch('fileupload/createFolder', {repoPath: this.path, folderName: this.model})
       this.close()
     },
 
     close () {
-      this.$store.dispatch('closeCreateFolderDialog')
+      this.$store.dispatch('fileupload/closeCreateFolderDialog')
     }
   }
 }

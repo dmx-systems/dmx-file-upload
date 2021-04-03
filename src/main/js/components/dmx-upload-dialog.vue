@@ -59,7 +59,7 @@ export default {
     },
 
     close () {
-      this.$store.dispatch('closeUploadDialog')
+      this.$store.dispatch('fileupload/closeUploadDialog')
     }
   }
 }

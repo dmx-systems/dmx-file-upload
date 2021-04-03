@@ -22,11 +22,11 @@ export default ({store}) => ({
     'dmx.files.folder': [
       {
         label: 'Upload File',
-        handler: _ => store.dispatch('openUploadDialog')
+        handler: _ => store.dispatch('fileupload/openUploadDialog')
       },
       {
         label: 'Create Folder',
-        handler: _ => store.dispatch('openCreateFolderDialog')
+        handler: _ => store.dispatch('fileupload/openCreateFolderDialog')
       }
     ]
   }
