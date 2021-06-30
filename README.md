@@ -4,4 +4,6 @@ Upload files to the [DMX](https://github.com/dmx-systems/dmx-platform) file repo
 
 ## Version History
 
-**1.0** -- unreleased
+**1.0** -- Jun 30, 2021
+
+* Basic functionality
