@@ -1,5 +1,6 @@
 package systems.dmx.fileupload;
 
+import static systems.dmx.accesscontrol.Constants.*;
 import systems.dmx.config.ConfigDef;
 import systems.dmx.config.ConfigModRole;
 import systems.dmx.config.ConfigService;
@@ -92,9 +93,7 @@ public class FileUploadPlugin extends PluginActivator {
     @Override
     public void preInstall() {
         cs.registerConfigDef(new ConfigDef(
-            // TODO: can't use AC constants -> cyclic dependency
-            // TODO: move registration to AC module?
-            ConfigTarget.TYPE_INSTANCES, "dmx.accesscontrol.username",
+            ConfigTarget.TYPE_INSTANCES, USERNAME,
             mf.newTopicModel(DISK_QUOTA, new SimpleValue(DISK_QUOTA_MB)),
             ConfigModRole.ADMIN
         ));
