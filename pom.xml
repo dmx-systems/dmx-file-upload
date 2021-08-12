@@ -7,7 +7,7 @@
     <name>DMX File Upload</name>
     <groupId>systems.dmx</groupId>
     <artifactId>dmx-file-upload</artifactId>
-    <version>1.0.1-SNAPSHOT</version>
+    <version>1.0.1</version>
     <packaging>bundle</packaging>
 
     <parent>
