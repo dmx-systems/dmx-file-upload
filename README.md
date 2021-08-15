@@ -4,6 +4,11 @@ Upload files to the [DMX](https://github.com/dmx-systems/dmx-platform) file repo
 
 ## Version History
 
+**1.0.2** -- Aug 15, 2021
+
+* Fixes:
+    * No "Duplicate" exception on plugin activation
+
 **1.0.1** -- Aug 12, 2021
 
 * Fixes:
