@@ -1,6 +1,6 @@
 {
   "name": "dmx-file-upload",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Upload files to the DMX file repository",
   "author": "Jörg Richter <jri@dmx.berlin>",
   "license": "AGPL-3.0",

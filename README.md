@@ -4,6 +4,11 @@ Upload files to the [DMX](https://github.com/dmx-systems/dmx-platform) file repo
 
 ## Version History
 
+**1.0.3** -- Aug 16, 2021
+
+* Fixes:
+    * 1st platform start with installed DMX File Upload plugin
+
 **1.0.2** -- Aug 15, 2021
 
 * Fixes:
