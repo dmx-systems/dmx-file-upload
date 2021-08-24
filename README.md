@@ -4,6 +4,11 @@ Upload files to the [DMX](https://github.com/dmx-systems/dmx-platform) file repo
 
 ## Version History
 
+**1.0.4** -- Aug 25, 2021
+
+* Fixes:
+    * No "Duplicate" exception when upgraded to 5.2 and File Upload 1.0.1 was installed
+
 **1.0.3** -- Aug 16, 2021
 
 * Fixes:
