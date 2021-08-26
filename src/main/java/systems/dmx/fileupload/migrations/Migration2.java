@@ -15,8 +15,8 @@ import java.util.List;
 
 /**
  * Removes duplicate "Configuration" assocs.
- * These occur if a DMX installation was upgraded to 5.2, and version File Upload 1.0.1 was once installed.
- * Note: migration 1 of File Upload 1.0.1 was faulty and has been fixed in File Upload 1.0.2.
+ * These occur if a DMX installation was upgraded to 5.2, and File Upload 1.0.1 was once installed.
+ * Note: migration 1 of File Upload 1.0.1 was faulty and has been fixed in 1.0.2.
  * <p>
  * Part of DMX File Upload 1.0.4
  * Runs ALWAYS
