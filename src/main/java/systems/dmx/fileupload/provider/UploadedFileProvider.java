@@ -1,12 +1,5 @@
 package systems.dmx.fileupload.provider;
 
-import systems.dmx.core.Topic;
-import systems.dmx.core.osgi.CoreActivator;
-import systems.dmx.core.service.CoreService;
-import systems.dmx.config.ConfigService;
-import static systems.dmx.files.Constants.*;
-import systems.dmx.files.DiskQuotaCheck;
-import systems.dmx.files.FilesPlugin;
 import systems.dmx.files.UploadedFile;
 
 import org.apache.commons.fileupload.FileItem;
@@ -33,7 +26,7 @@ import javax.ws.rs.ext.Provider;
 
 
 @Provider
-public class UploadedFileProvider implements MessageBodyReader<UploadedFile>, DiskQuotaCheck {
+public class UploadedFileProvider implements MessageBodyReader<UploadedFile> {
 
     // ---------------------------------------------------------------------------------------------- Instance Variables
 
@@ -63,18 +56,6 @@ public class UploadedFileProvider implements MessageBodyReader<UploadedFile>, Di
         }
     }
 
-    // *** DiskQuotaCheck ***
-
-    @Override
-    public void check(long fileSize) {
-        CoreService dmx = CoreActivator.getCoreService();
-        String username = dmx.getPrivilegedAccess().getUsername(request);
-        if (username == null) {
-            throw new RuntimeException("User <anonymous> has no disk quota");
-        }
-        dmx.fireEvent(FilesPlugin.CHECK_DISK_QUOTA, username, fileSize, diskQuota(username));
-    }
-
     // ------------------------------------------------------------------------------------------------- Private Methods
 
     private UploadedFile parseMultiPart() {
@@ -95,7 +76,7 @@ public class UploadedFileProvider implements MessageBodyReader<UploadedFile>, Di
                     if (file != null) {
                         throw new RuntimeException("Only single file uploads are supported");
                     }
-                    file = new UploadedFile(item.getName(), item.getSize(), item.getInputStream(), this);
+                    file = new UploadedFile(item.getName(), item.getSize(), item.getInputStream());
                     logger.info("### field \"" + fieldName + "\" => " + file);
                 }
             }
@@ -106,12 +87,5 @@ public class UploadedFileProvider implements MessageBodyReader<UploadedFile>, Di
         } catch (Exception e) {
             throw new RuntimeException("Parsing multipart/form-data request failed", e);
         }
-    }
-
-    private long diskQuota(String username) {
-        Topic usernameTopic = CoreActivator.getCoreService().getPrivilegedAccess().getUsernameTopic(username);
-        ConfigService cs = CoreActivator.getService(ConfigService.class);
-        Topic configTopic = cs.getConfigTopic(DISK_QUOTA, usernameTopic.getId());
-        return 1024 * 1024 * configTopic.getSimpleValue().intValue();
     }
 }
