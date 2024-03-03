@@ -29,9 +29,7 @@ URL="upload/%2Fworkspace-${WSID}"
 for this_file in ${FILES[@]}; do
     if [ -f ${pdf} ]; then
         echo "INFO: Upload ${this_file} to ${HOST}/${URL}"
-        # UPLOADED="$( curl -sS -H "Cookie: JSESSIONID=${SESSIONID}" -F "data=@${pdf}" "${HOST}/${URL}" | jq . )"
         UPLOADED="$( curl -sS -H "Cookie: JSESSIONID=${SESSIONID}" -F "data=@${this_file}" "${HOST}/${URL}" 2>&1 )"
-        echo "${UPLOADED}"
         if [ "$( echo "${UPLOADED}" | grep -i ERROR | grep 500 )" ]; then
             echo "ERROR! Upload failed for ${this_file}."
             echo -e "DEBUG:\n${UPLOADED}"
@@ -53,7 +51,7 @@ for this_file in ${FILES[@]}; do
         echo -e "DEBUG:\n${UPLOADED}"
         exit 1
     else
-        ## persist resluts
+        ## persist results
         echo "${U_NAME}:${U_ID}" >> uploaded_files.tmp
         echo "INFO: File upload for ${U_NAME} succesful. (id=${U_ID})"
     fi
