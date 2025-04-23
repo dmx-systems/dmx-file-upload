@@ -4,6 +4,13 @@ Upload files to the [DMX](https://github.com/dmx-systems/dmx-platform) file repo
 
 ## Version History
 
+**1.0.5** -- Apr 23, 2025
+
+* Chore:
+    * Use new resource handling approach as introduced in DMX 5.3.4
+    * Upgrade Babel 6 -> 7
+* Compatible with DMX 5.3.5
+
 **1.0.4** -- Aug 25, 2021
 
 * Fixes:
