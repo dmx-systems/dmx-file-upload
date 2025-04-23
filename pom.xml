@@ -47,6 +47,7 @@
                 <configuration>
                     <instructions>
                         <Bundle-Activator>systems.dmx.fileupload.FileUploadPlugin</Bundle-Activator>
+                        <Include-Resource>{maven-resources},web=target/classes/web</Include-Resource>
                         <Embed-Dependency>commons-fileupload</Embed-Dependency>
                         <Import-Package>!javax.portlet, *</Import-Package>
                     </instructions>
