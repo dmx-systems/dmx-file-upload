@@ -1,5 +1,5 @@
 <template>
-  <el-dialog custom-class="dmx-create-folder-dialog" :visible="visible2" :title="title" :modal="false" v-draggable
+  <el-dialog class="dmx-create-folder-dialog" :model-value="visible2" :title="title" :modal="false"
       @opened="focus" @close="close">
     <div class="field-label">Folder Name</div>
     <el-input v-model="model" ref="input" @keyup.native.enter="action"></el-input>

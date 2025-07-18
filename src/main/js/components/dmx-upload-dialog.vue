@@ -1,5 +1,5 @@
 <template>
-  <el-dialog custom-class="dmx-upload-dialog" :visible="visible" :title="title" :modal="false" v-draggable
+  <el-dialog class="dmx-upload-dialog" :model-value="visible" :title="title" :modal="false"
       @open="clearError" @close="close">
     <el-upload :action="action" :on-success="onSuccess" :on-error="onError" ref="upload">
       <el-button slot="trigger" type="primary" @click="clearError">Select File</el-button>
