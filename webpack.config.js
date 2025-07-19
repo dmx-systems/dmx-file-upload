@@ -21,23 +21,20 @@ module.exports = {
     rules: [
       {
         test: /\.vue$/,
-        loader: 'vue-loader'
+        use: 'vue-loader'
       },
       {
         test: /\.js$/,
-        loader: 'babel-loader',
+        use: 'babel-loader',
         exclude: /node_modules/
       },
       {
         test: /\.css$/,
-        loader: [MiniCssExtractPlugin.loader, 'css-loader']
+        use: [MiniCssExtractPlugin.loader, 'css-loader']
       },
       {
         test: /\.(png|jpg|jpeg|gif|eot|ttf|woff|woff2|svg|svgz)(\?.+)?$/,
-        loader: 'file-loader',
-        options: {
-          esModule: false   // Note: since file-loader 5.0 "esModule" is true by default.
-        }                   // Does not work with "require(image)" (see dmx-geomap-renderer.vue).
+        type: 'asset/resource'
       }
     ]
   },
@@ -49,8 +46,8 @@ module.exports = {
     new VueLoaderPlugin()
   ],
   stats: {
-    entrypoints: false,
-    assetsSort: 'chunks'
+    assets: false,
+    modules: false
   },
   performance: {
     hints: false

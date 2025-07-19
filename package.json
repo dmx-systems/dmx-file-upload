@@ -9,23 +9,20 @@
     "url": "https://github.com/dmx-systems/dmx-file-upload.git"
   },
   "scripts": {
-    "build": "webpack -p --hide-modules",
-    "stats": "webpack -p --json > stats.json && webpack-bundle-analyzer stats.json target/classes/web"
+    "build": "webpack --mode production",
+    "stats": "webpack --mode production --analyze"
   },
   "peerDependencies": {
-    "vue": "2.6.11"
+    "vue": "3.5.13"
   },
   "devDependencies": {
-    "@babel/core": "7.24.8",
-    "@babel/preset-env": "7.24.8",
-    "babel-loader": "8.3.0",
-    "css-loader": "3.4.2",
-    "file-loader": "5.1.0",
-    "mini-css-extract-plugin": "0.9.0",
-    "vue-loader": "15.9.0",
-    "vue-template-compiler": "2.6.11",
-    "webpack": "4.41.6",
-    "webpack-cli": "3.3.11",
-    "webpack-dev-server": "3.10.3"
+    "@babel/core": "7.26.0",
+    "@babel/preset-env": "7.26.0",
+    "babel-loader": "9.2.1",
+    "css-loader": "7.1.2",
+    "mini-css-extract-plugin": "2.9.2",
+    "vue-loader": "17.4.2",
+    "webpack": "5.96.1",
+    "webpack-cli": "5.1.4"
   }
 }
