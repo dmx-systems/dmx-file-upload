@@ -5,7 +5,7 @@ export default ({store}) => ({
     module: require('./file-upload').default
   },
 
-  extraElementUI: true,
+  extraElementComponents: true,
 
   components: [
     {
